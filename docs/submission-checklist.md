@@ -15,12 +15,12 @@ Internal pre-submit gate. Walk top-to-bottom and check off.
 
 In `docs/kaggle_writeup.md`:
 
-- [ ] Replace `_set after publishing._` (GitHub repo URL).
-- [ ] Replace `_link set after upload._` (YouTube URL).
+- [x] GitHub repo URL: https://github.com/mukatee/rytmi-pub ✓
+- [x] YouTube URL in writeup: https://youtu.be/ISkf6fZbG-Y ✓
 
 In `README.md`:
 
-- [ ] Replace `_link goes here after YouTube upload_` (YouTube URL).
+- [x] YouTube URL: https://youtu.be/ISkf6fZbG-Y ✓
 
 ## Music attribution / risk
 

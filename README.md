@@ -1,6 +1,6 @@
 # Rytmi — DSP + Gemma 4 rhythm-learning prototype
 
-> **▶ 3-minute demo video:** _link goes here after YouTube upload_  ·  **Kaggle writeup:** [docs/kaggle_writeup.md](docs/kaggle_writeup.md)
+> **▶ 3-minute demo video:** [YouTube](https://youtu.be/ISkf6fZbG-Y)  ·  **Kaggle writeup:** [docs/kaggle_writeup.md](docs/kaggle_writeup.md)  ·  **Public repo:** <https://github.com/mukatee/rytmi-pub>
 
 ![Rytmi architecture — DSP listens, Gemma 4 talks](demo_assets/cover.png)
 

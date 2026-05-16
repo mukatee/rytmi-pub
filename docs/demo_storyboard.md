@@ -436,3 +436,13 @@ Post-pass-#5 (video locked at 2:55.5) followup that closes (μ) and (ν) from pa
 - **(ν) YouTube music licensing** — chose disclaimer route over re-cut. New writeup section *"A note on the demo video's audio"* explicitly names every commercial excerpt and documents the educational-use basis, plus a CC-alternative exploration paragraph and a takedown commitment. Reel itself stays as-is; commercial tracks remain because (per viewer assessment) the CC catalogue did not contain comparable instances of the failure modes the demo illustrates.
 
 **Still deferred (post-submission OK):** CC-BY sample pack so `00_demo.ipynb` doesn't depend on user-supplied audio; Kaggle Notebook upload + badge URL in README.
+
+### Restore Act 2.5 framing slide (2026-05-17) — built — context-cliff fix
+
+After uploading the pass-#5 master to YouTube, a viewer flagged that the master jumps straight from the architecture diagram into Gemma's `rhythm_anatomy` panel for an unnamed song. Kizomba arrives via Gemma narration but the *style* itself is never named to the viewer — context cliff. Pass #5 had retired the whole 12.5 s Act 2.5 to make the 3:00 cap; only the audible-misfire beat actually deserved to go.
+
+- **(ξ) Act 2.5 restored as a single 5.0 s silent framing slide** — *"Example case: kizomba."* / *"An Afro-Latin partner-dance style where the pulse a dancer steps on hides behind a syncopated kick."* `make_act2_5_video.py` rewritten from the old two-scene + clicks-audio version into a single-scene silent slide that mirrors `make_act1_video.py`'s `anullsrc` pattern. The audible-misfire scene from the original Act 2.5 is *not* restored (it needed kizomba ear-training to read and didn't earn screen time).
+- **(ο) Act 1 caption1 trimmed 5.5 → 4.5 s** — the personal-hook slide ("I wanted to dance to the music…") was over-held; 4.5 s reads naturally and clears 1 s of budget for the restored framing slide.
+- **Net timing change**: +5.0 s (new Act 2.5) − 0.5 s (one new inter-act xfade) − 1.0 s (Act 1 caption1 trim) = **+3.5 s**. Master goes 175.5 → **179.0 s = 2:59.0**, 1.0 s headroom under the 3:00 cap.
+
+Trade-off accepted: 1 s of headroom is tight but the framing slide is worth more than the headroom because it removes a viewer cold-start question right before the Filomena deep-dive begins.

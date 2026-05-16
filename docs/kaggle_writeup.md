@@ -76,12 +76,12 @@ Next steps (also on the demo close-slide): sharper beat & downbeat grid (meter v
 
 ## Links to assets
 
-- **GitHub repo:** _set after publishing._
-- **Demo video (3 min, YouTube):** _link set after upload._
-- **Demo notebook:** [`notebooks/00_demo.ipynb`](../notebooks/00_demo.ipynb)
+- **GitHub repo:** <https://github.com/mukatee/rytmi-pub>
+- **Demo video (3 min, YouTube):** <https://youtu.be/ISkf6fZbG-Y>
+- **Demo notebook:** [`notebooks/00_demo.ipynb`](https://github.com/mukatee/rytmi-pub/blob/master/notebooks/00_demo.ipynb)
 - **Gemma model card:** <https://ai.google.dev/gemma> · Kaggle Models: <https://www.kaggle.com/models/google/gemma> · Ollama tags: <https://ollama.com/library/gemma3>
-- **Architecture, evaluation, phase notes:** [`docs/how-it-works.md`](how-it-works.md), [`docs/project-vision.md`](project-vision.md), [`docs/experiments/`](experiments/)
+- **Architecture, evaluation, phase notes:** [how-it-works.md](how-it-works.md), [project-vision.md](project-vision.md), [experiments/](experiments/)
 
 ## A note on the demo video's audio
 
-The 3-minute demo video uses short excerpts (~14 s each) of commercial recordings — Filomena Maricoa _Teu Toque_, Charbel _E Magia_, Romeo Santos _Propuesta Indecente_, Prince Royce _Corazón Sin Cara_, Mika Mendes _Mágico_ — solely to demonstrate rhythm analysis and coaching on real material learners want to dance to. A CC-licensed alternative was explored but did not contain comparable instances of the failure modes shown (subtle kizomba pulse, severe break, distinctive vocal entry). If YouTube's ContentID flags the upload, the excerpts will be substituted or removed on request.
+The 3-minute demo video uses short excerpts (~14 s each) of three commercial recordings — Filomena Maricoa _Teu Toque_, Charbel _E Magia_, Prince Royce _Corazón Sin Cara_ — solely to demonstrate rhythm analysis and coaching on real material learners want to dance to. A CC-licensed alternative was explored but did not contain comparable instances of the failure modes shown (subtle kizomba pulse, severe break, distinctive vocal entry). If YouTube's ContentID flags the upload, the excerpts will be substituted or removed on request.

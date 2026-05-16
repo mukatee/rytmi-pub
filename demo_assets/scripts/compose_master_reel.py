@@ -60,12 +60,13 @@ class Act:
 ACTS: list[Act] = [
     Act(OUTPUT_DIR / "act1_hook.mp4", "Act 1 · hook"),
     Act(OUTPUT_DIR / "act2_architecture.mp4", "Act 2 · architecture"),
-    # Act 2.5 (kizomba example case + audible misfire) retired in
-    # clarity pass #5 to bring the master under the Kaggle 3:00 cap and
-    # to reach the Gemma-coaching beef faster. The kizomba framing now
-    # lands via Gemma's own rhythm_anatomy panel in Act 3a (stronger
-    # attribution anyway); the audible misfire was a DSP-side beat that
-    # needed kizomba ear-training to read and didn't earn its ~13 s.
+    # Act 2.5 restored 2026-05-17 as a single 5 s framing slide
+    # ("Example case: kizomba." + one-line genre gloss). The original
+    # 12.5 s version (with audible-misfire clicks overlay) was retired in
+    # clarity-pass-5; the framing scene was dropped with it, which left a
+    # context cliff into Act 3a's `rhythm_anatomy` panel. This slim
+    # version restores the genre frame without the DSP-misfire beat.
+    Act(OUTPUT_DIR / "act2_5_kizomba_intro.mp4", "Act 2.5 · kizomba framing"),
     Act(OUTPUT_DIR / "act3a_preroll.mp4", "Act 3a · pre-roll panels"),
     Act(OUTPUT_DIR / "act3a_unified_timeline.mp4", "Act 3a · unified timeline"),
     Act(OUTPUT_DIR / "rytmi_demo_reel.mp4", "Act 3 · audio reel (Option Z)"),
