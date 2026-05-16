@@ -1,0 +1,147 @@
+# Hand-marked perceived step positions for kizomba eval tracks.
+#
+# Notation:
+#   "M{m}+{n}"  the n-th onset (1-indexed) within measure m, where measure
+#               numbering matches the M-labels drawn above the wave in
+#               notebooks/06_kizomba_batida_check.ipynb (M1 == first
+#               measure after the first detected downbeat).
+#   "M{m}"      same as "M{m}+1" (first onset in measure m).
+#   "0+{n}"     the n-th onset in the partial pre-M1 region (no M prefix
+#               and measure 0 is reserved for that pickup measure).
+#
+# `stem` is matched by substring against `Path.stem`, so a fragment like
+# "Baila_Kizomba" matches "Baila_Kizomba_Amor [XG11YxMWgaI]".
+#
+# These notes are append-only ground truth — do not retroactively rewrite
+# old marks; just add new tracks.
+tracks:
+  - stem: Baila_Kizomba
+    notes:
+      - "0+1"
+      - "0+3"
+      - "0+5"
+      - "M1+1"
+      - "M1+3"
+      - "M1+5"
+      - "M1+7"
+      - "M1+9"
+      - "M2+2"
+      - "M2+4"
+      - "M2+6"
+      - "M2+8"
+      - "M3"
+      - "M3+3"
+      - "M3+5"
+      - "M3+7"
+      - "M3+10"
+      - "M4+2"
+      - "M4+4"
+      - "M4+6"
+      - "M4+8"
+      - "M4+10"  # also reads as M5
+
+  - stem: Teu_Toque
+    notes:
+      - "M4+10"
+      - "M5+3"
+      - "M5+5"
+      - "M5+8"
+      - "M5+10"  # also reads as M6
+      - "M6+3"
+      - "M6+5"
+      - "M6+8"
+      - "M6+10"  # also reads as M7
+      - "M7+3"
+      - "M7+5"
+      - "M7+8"
+      - "M8+1"
+      - "M8+4"
+      - "M8+6"
+      - "M8+9"
+      - "M9"
+      - "M9+4"
+      - "M9+8"
+      - "M9+13"
+
+  - stem: Criola
+    notes:
+      - "M10+3"
+      - "M10+6"
+      - "M10+10"
+      - "M11+5"
+      # NOTE: user marked one tap "halfway between M11+9 and M11+10"
+      # (sits on a green dashed beat, not a numbered onset). Rounded to
+      # M11+9 (closer of the two) — the M{m}+{n} notation can only
+      # point at numbered onsets.
+      - "M11+9"
+      - "M12+1"
+      - "M12+5"
+      - "M12+7"
+      - "M12+10"
+      - "M13+4"
+      - "M13+7"
+      - "M13+10"
+      - "M14+2"
+      - "M14+6"
+      - "M14+8"
+      - "M15"      # M15+1
+      - "M15+4"
+      - "M15+8"
+      - "M15+12"
+      - "M16+2"
+      - "M16+6"
+      - "M16+11"
+
+  - stem: Charbel
+    notes:
+      # M9+1 ("M9") visually overlaps an orange "2" marker — that's the
+      # downbeat/beat-2 label, not a separate onset. Tap is on M9+1.
+      - "M9"
+      - "M9+2"
+      - "M9+4"
+      - "M9+7"
+      - "M10+1"
+      - "M10+3"
+      - "M10+5"
+      - "M10+8"
+      - "M11+1"
+      - "M11+2"
+      - "M11+5"
+      - "M11+8"
+      - "M12+1"
+      - "M12+3"
+      - "M12+5"
+      - "M12+8"
+      - "M13+1"
+      - "M13+3"
+      - "M13+5"
+      - "M13+8"
+      - "M14+1"
+      - "M14+3"
+      - "M14+5"
+
+  - stem: MIKA_MENDES
+    notes:
+      - "M13+5"
+      - "M13+8"
+      - "M13+11"
+      - "M14+3"
+      - "M14+6"
+      - "M14+9"
+      - "M15+1"
+      - "M15+4"
+      - "M15+6"
+      - "M15+8"
+      - "M16+1"
+      - "M16+5"
+      - "M16+7"
+      - "M16+10"
+      - "M17+2"
+      - "M17+5"
+      - "M17+7"
+      - "M17+10"
+      - "M18+4"
+      - "M18+7"
+      - "M18+10"
+      - "M18+13"
+      - "M19+3"

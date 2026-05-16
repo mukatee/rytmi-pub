@@ -1,0 +1,72 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environment
+.venv/
+.yt-dlp-venv/
+
+# IDE
+.idea/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_metadata/
+
+# Audio data (keep small samples, ignore large files)
+!data/samples/
+data/**/*.wav
+data/**/*.mp3
+data/**/*.flac
+!data/samples/*.wav
+!data/samples/*.mp3
+
+# Downloaded datasets
+data/songs/
+data/fma_metadata/
+downloads/
+
+# Timeline widget cache (regenerated per notebook run)
+data/_timeline_cache/
+data/_analysis_cache/
+
+# Vocal activity envelopes (Demucs/Gemma output, per-track .npz; regenerated)
+cache/vocals/
+
+# Other DSP caches (drums stems, bass stems; regenerated)
+cache/bass/
+cache/drums/
+
+# Notebook-local caches and renders (regenerated per run)
+notebooks/cache/
+notebooks/out/
+
+# Per-notebook output dumps (Phase 34 review helper; regenerated per run)
+notebooks/*_outputs.md
+
+# Claude Code local state
+.claude/
+
+# Scratch dir — exploratory scripts, eval logs, debug dumps; never committed.
+tmp/
+
+# Secrets
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# HuggingFace cache
+*.bin
+*.safetensors
+
+# Coverage
+.coverage
+htmlcov/
+demo_assets/output/

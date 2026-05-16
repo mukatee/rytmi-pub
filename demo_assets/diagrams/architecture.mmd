@@ -1,0 +1,23 @@
+%%{init: {'theme':'base', 'themeVariables': {'fontFamily':'Inter, Helvetica, Arial, sans-serif', 'primaryColor':'#1e293b', 'primaryTextColor':'#f8fafc', 'lineColor':'#64748b', 'background':'#0f172a'}}}%%
+flowchart LR
+    A[Audio file<br/><i>mp3 / wav</i>] --> B[librosa DSP]
+    B --> B1[beat tracking<br/>onset detection<br/>tempo estimation]
+    B --> B2[HPSS<br/>harmonic / percussive split]
+    B --> B3[section structure<br/>energy + repetition]
+    A --> D[Demucs<br/><i>vocal stems</i>]
+    D --> B3
+    B1 --> R[(RhythmAnalysis<br/>+ SongPhase[]<br/>+ SongSection[])]
+    B2 --> R
+    B3 --> R
+    R --> P[Prompt builder<br/><i>style-aware,<br/>section-aware</i>]
+    P --> G[Gemma 4<br/><i>26B-A4B via cloud<br/>or E4B local</i>]
+    G --> V[Verifier<br/><i>code re-grounds<br/>each line in DSP</i>]
+    V --> O[Coaching output<br/>tutor + drills + transitions<br/>unified timeline]
+    R -.-> V
+
+    classDef dsp fill:#0e7490,stroke:#06b6d4,color:#f0fdfa
+    classDef llm fill:#7c3aed,stroke:#a78bfa,color:#f5f3ff
+    classDef io fill:#1e293b,stroke:#475569,color:#f8fafc
+    class B,B1,B2,B3,D dsp
+    class G,P,V llm
+    class A,R,O io

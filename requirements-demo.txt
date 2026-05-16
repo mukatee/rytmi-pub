@@ -1,0 +1,30 @@
+# Reviewer-friendly install for the Rytmi demo notebook.
+#
+# Covers the minimum needed to inspect / run `notebooks/00_demo.ipynb`
+# against any OpenAI-compatible Gemma 4 endpoint (Ollama, hosted, etc.).
+# Excludes optional heavy extras: HuggingFace local backend, Demucs vocal
+# separation, BeatNet/madmom downbeat fusion, Gradio app. Those live in
+# the `[llm]`, `[vocals]`, `[downbeat]`, `[app]` extras in pyproject.toml
+# and are not required to see what Gemma 4 produces on a kizomba or
+# bachata track.
+#
+# Quickstart for a reviewer:
+#   python -m venv .venv && source .venv/bin/activate
+#   pip install -r requirements-demo.txt
+#   pip install -e .
+#   # point at any OpenAI-compatible Gemma 4 endpoint, e.g. local Ollama:
+#   ollama pull gemma3:4b && ollama serve   # or your hosted endpoint
+#   jupyter lab notebooks/00_demo.ipynb
+
+librosa>=0.11.0
+scipy>=1.14
+soundfile>=0.13.0
+standard-aifc
+standard-sunau
+matplotlib>=3.8
+numpy>=2.0
+
+openai>=1.0
+
+jupyter>=1.1
+ipywidgets>=8.1
