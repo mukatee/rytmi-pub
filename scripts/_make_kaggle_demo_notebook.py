@@ -60,6 +60,7 @@ coaching, transitions, listening guides, drills).
 | Link | |
 |---|---|
 | Code (public mirror) | https://github.com/mukatee/rytmi-pub |
+| Kaggle Notebook      | https://www.kaggle.com/code/donkeys/gemma-dancing |
 | Demo video           | https://youtu.be/ISkf6fZbG-Y |
 | Writeup              | see `docs/kaggle_writeup.md` in the repo |
 
@@ -634,11 +635,20 @@ perform it, even for commercial purposes, without asking permission.
 
 This notebook uses [Gemma 4](https://ai.google.dev/gemma) via the
 OpenAI-compatible endpoint at
-`https://generativelanguage.googleapis.com/v1beta/openai/`.  Default
-checkpoint: `gemma-4-e4b` (small enough to host on Kaggle's free T4).
-Larger Gemma 4 checkpoints (e.g. `gemma-4-e2b`, `gemma-4-26b-a4b`)
-produce richer outputs but require more compute.  See
-`docs/project-vision.md` in the repo for model-selection guidance.
+`https://generativelanguage.googleapis.com/v1beta/openai/`.  The default
+slug in the config cell is `google/gemma-4-e4b-it` — small enough to
+host on Kaggle's free T4.
+
+> **Note on the cached outputs shown above:** the pre-generated Gemma
+> text bundled with this notebook was produced with the larger
+> `gemma-4-26b-a4b-it` checkpoint, which gives noticeably richer
+> coaching language than E4B.  Running the notebook in *live* mode with
+> `google/gemma-4-e4b-it` (the default) will produce shorter, simpler
+> outputs — still grounded by the same DSP analysis and verifiers.
+> Set `GEMMA_MODEL = "google/gemma-4-26b-a4b-it"` in the config cell to
+> reproduce the cached quality live.
+
+See `docs/project-vision.md` in the repo for model-selection guidance.
 
 ### Code — Rytmi
 
@@ -652,6 +662,31 @@ is in the public repository
 End-to-end walkthrough on real-world (copyrighted) kizomba and bachata
 tracks: <https://youtu.be/ISkf6fZbG-Y>.  Educational use only; rights
 remain with the original artists.
+
+### Further reading
+
+All links point to the public mirror at
+[mukatee/rytmi-pub](https://github.com/mukatee/rytmi-pub).
+
+- [`docs/kaggle_writeup.md`](https://github.com/mukatee/rytmi-pub/blob/master/docs/kaggle_writeup.md) —
+  the Kaggle submission writeup, including the lessons-learned section
+  on what worked and what didn't when prompting Gemma 4 for grounded
+  music coaching (e.g. *"helper rationale text becomes echoed
+  vocabulary"*, *"negative examples can backfire"*, *"code beats prompt
+  prose for structural invariants"*).
+- [`docs/how-it-works.md`](https://github.com/mukatee/rytmi-pub/blob/master/docs/how-it-works.md) —
+  walkthrough of the DSP → prompt → Gemma architecture and the
+  verifier layer.
+- [`docs/project-vision.md`](https://github.com/mukatee/rytmi-pub/blob/master/docs/project-vision.md) —
+  problem framing, model-selection guidance, and roadmap.
+- [`docs/audio-sources.md`](https://github.com/mukatee/rytmi-pub/blob/master/docs/audio-sources.md) —
+  how the CC0 demo track was chosen and licensing details for other
+  audio paths.
+- [`docs/experiments/`](https://github.com/mukatee/rytmi-pub/tree/master/docs/experiments) —
+  dated phase notes capturing each iteration: prompt-tuning learnings,
+  the kizomba batida tracker, the mel-filterbank gotcha, the drills
+  verifier, the unified-timeline design, and the Gemma audio probe
+  negative result.
 """))
 
 
