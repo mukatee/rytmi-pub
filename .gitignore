@@ -44,6 +44,10 @@ cache/drums/
 
 # Notebook-local caches and renders (regenerated per run)
 notebooks/cache/
+# Exception: cc0 pre-built cache files are distributed for the Kaggle demo
+!notebooks/cache/cc0_07_besame_otra_vez.pkl
+!notebooks/cache/cc0_07_besame_otra_vez_outputs.json
+!notebooks/cache/cc0_07_besame_otra_vez_timeline.png
 notebooks/out/
 
 # Per-notebook output dumps (Phase 34 review helper; regenerated per run)
