@@ -30,7 +30,7 @@ Rytmi addresses this two ways:
 
 ## Quickstart (full install)
 
-Requires Python ≥ 3.13.
+Requires Python ≥ 3.12.
 
 ```bash
 pip install -e ".[cloud,notebook]"
