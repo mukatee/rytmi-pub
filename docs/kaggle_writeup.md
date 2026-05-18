@@ -15,7 +15,7 @@ Rytmi treats this as a teachable moment. A style-aware DSP layer reports what th
 
 `audio → DSP (librosa + Demucs) → RhythmAnalysis → Gemma 4 prompt → coaching, with a verifier that re-grounds Gemma's output in the DSP result.`
 
-The split is deliberate: DSP handles what the audio physically contains; Gemma handles language. Gemma is never the primary beat detector and is forbidden from inventing musical facts. A small core: `src/rytmi/dsp.py` (beat tracking, HPSS, section labelling, downbeat detection, a kizomba-specific batida tracker), `src/rytmi/prompts.py` (style-aware prompt registry + deterministic verifiers + `format_unified_timeline`), `src/rytmi/llm.py` (Ollama or any OpenAI-compatible Gemma 4 backend).
+The split is deliberate: DSP handles what the audio physically contains; Gemma handles language. Gemma is never the primary beat detector and is forbidden from inventing musical facts.
 
 ## How Gemma 4 is used
 
@@ -51,12 +51,6 @@ P7: main (159s-195s) — same walk-step as P2-P5, now add subtle hip styling. 36
 
 One live run showed why the verifier matters: Gemma generated good drill prose but crossed a `main → outro` boundary. A 17-track rerun on our kizomba eval set: 0/17 duplicated phases, but 14/17 needed at least one structural repair — almost always because Gemma collapsed many same-label `main` segments into long P#-P# ranges that under-covered the song. The verifier expanded those into phase-correct lines without rewriting Gemma's coaching language.
 
-## Challenges
-
-**Kizomba downbeats are acoustically subtle, not absent.** On every kizomba track in our eval set, `downbeat_confidence < 0.25`. We treated downbeat *detection* as out of scope and pivoted to per-section beat-clarity scoring, so the tutor can say "trust the pulse here" honestly, without ever naming a "1".
-
-**The mel-filterbank gotcha.** The kizomba batida tracker low-passes to 150 Hz then runs `librosa.onset.onset_strength`. This silently produced an all-zero envelope for weeks — the default mel filterbank has no bins below ~80 Hz. Fix: explicit `fmin=20.0, n_mels=8`. Pooled tap-reference F-score on 19 takes: 0.587 → 0.678. When a library silently returns zeros, suspect filterbank assumptions before the input.
-
 ## Lessons learned about Gemma 4
 
 - **Helper rationale text becomes echoed vocabulary.** Three iterations of the kizomba downbeat guard pinned this down: keeping the word `downbeat` *only* inside the forbidden-token enumeration (never in declarative explanation) reduced "downbeat" mentions in learner output from 3/7 tracks to 1/7. Same pattern with decimals: listing `'percussiveness of 0.22'` as a forbidden example made the model quote `0.22` on unrelated tracks. Keep negative examples abstract (`<number>`); put the positive replacement next to the forbidden form.
@@ -87,4 +81,4 @@ Next steps (also on the demo close-slide): sharper beat & downbeat grid (meter v
 
 ## A note on the demo video's audio
 
-The 3-minute demo video uses short excerpts (~14 s each) of three commercial recordings — Filomena Maricoa _Teu Toque_, Charbel _E Magia_, Prince Royce _Corazón Sin Cara_ — solely to demonstrate rhythm analysis and coaching on real material learners want to dance to. A CC-licensed alternative was explored but did not contain comparable instances of the failure modes shown (subtle kizomba pulse, severe break, distinctive vocal entry). If YouTube's ContentID flags the upload, the excerpts will be substituted or removed on request.
+The 3-minute demo video uses short excerpts (~14 s each) of three commercial recordings — Filomena Maricoa _Teu Toque_, Charbel _E Magia_, Prince Royce _Corazón Sin Cara_ — the kind of music learners actually want to dance to. No CC-licensed track with comparable musical features was available. Excerpts will be substituted if flagged.
