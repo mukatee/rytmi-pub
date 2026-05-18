@@ -503,14 +503,14 @@ def display_track(slug: str, display_title: str) -> None:
     ))
 
     # --- Interactive timeline + audio player ------------------------------
-    display(Markdown("### Interactive timeline\\nPlay, scrub, or click to seek. "
-                     "The red cursor tracks the audio."))
+    display(Markdown("### DSP · Interactive timeline\\n_What the signal layer detected._ "
+                     "Play, scrub, or click to seek. The red cursor tracks the audio."))
     show_timeline(analysis, title=display_title)
 
     # --- Per-section table -------------------------------------------------
     # Wrap the plain-text table in a horizontally-scrollable <pre> so the
     # Kaggle notebook viewer (narrow column) doesn't word-wrap it.
-    display(Markdown("### Section table (what DSP heard)"))
+    display(Markdown("### DSP · Section table — the structured input Gemma 4 reads"))
     import html as _html
     display(HTML(
         "<pre style='overflow-x:auto; white-space:pre; font-size:0.9em; "
@@ -518,13 +518,18 @@ def display_track(slug: str, display_title: str) -> None:
     ))
 
     # --- Gemma outputs -----------------------------------------------------
+    display(Markdown(
+        "> **Everything below is Gemma 4's output.** The model turns the "
+        "DSP table above into language a dancer can use — grounded in "
+        "those numbers, never hand-written or invented."
+    ))
     headings = {
-        "rhythm_anatomy":      "Rhythm anatomy — kizomba as a genre",
-        "listening_guide":     "Listening guide — orient the ear",
-        "song_arc":            "Song arc — the energy journey",
-        "kizomba_tutor":       "Kizomba tutor — per-phase coaching",
-        "kizomba_drills":      "Practice plan — drills tied to sections",
-        "kizomba_transitions": "Transitions — what to do at boundaries",
+        "rhythm_anatomy":      "Gemma 4 · Rhythm anatomy — kizomba as a genre",
+        "listening_guide":     "Gemma 4 · Listening guide — orient the ear",
+        "song_arc":            "Gemma 4 · Song arc — the energy journey",
+        "kizomba_tutor":       "Gemma 4 · Kizomba tutor — per-phase coaching",
+        "kizomba_drills":      "Gemma 4 · Practice plan — drills tied to sections",
+        "kizomba_transitions": "Gemma 4 · Transitions — what to do at boundaries",
     }
     for key, heading in headings.items():
         text = outs.get(key, "")
@@ -535,7 +540,7 @@ def display_track(slug: str, display_title: str) -> None:
             display(Markdown(f"_(no cached output for `{key}` — re-run cache build)_"))
 
     if "unified_timeline" in outs:
-        display(Markdown("### Unified timeline (phases + transitions in one story)"))
+        display(Markdown("### Gemma 4 + verifier · Unified timeline — coaching, code-checked against DSP sections"))
         display(HTML(
             "<pre style='overflow-x:auto; white-space:pre; font-size:0.9em; "
             "line-height:1.3'>" + _html.escape(outs["unified_timeline"]) + "</pre>"
@@ -582,13 +587,17 @@ if AUDIO_PATH and Path(AUDIO_PATH).exists():
             f"{len(getattr(byo_analysis, 'sections', []) or [])} sections"
         ))
         show_timeline(byo_analysis, title=Path(AUDIO_PATH).stem)
+        display(Markdown(
+            "> **Everything below is Gemma 4's output**, grounded in the "
+            "DSP analysis above."
+        ))
         for key, heading in [
-            ("rhythm_anatomy",      "Rhythm anatomy"),
-            ("listening_guide",     "Listening guide"),
-            ("song_arc",            "Song arc"),
-            ("kizomba_tutor",       "Kizomba tutor"),
-            ("kizomba_drills",      "Drills"),
-            ("kizomba_transitions", "Transitions"),
+            ("rhythm_anatomy",      "Gemma 4 · Rhythm anatomy"),
+            ("listening_guide",     "Gemma 4 · Listening guide"),
+            ("song_arc",            "Gemma 4 · Song arc"),
+            ("kizomba_tutor",       "Gemma 4 · Kizomba tutor"),
+            ("kizomba_drills",      "Gemma 4 · Drills"),
+            ("kizomba_transitions", "Gemma 4 · Transitions"),
         ]:
             text = byo_outs.get(key, "")
             if text and not text.startswith("[ERROR"):
@@ -596,7 +605,7 @@ if AUDIO_PATH and Path(AUDIO_PATH).exists():
                 display(Markdown(as_markdown(text)))
         if "unified_timeline" in byo_outs:
             import html as _html
-            display(Markdown("### Unified timeline"))
+            display(Markdown("### Gemma 4 + verifier · Unified timeline"))
             display(HTML(
                 "<pre style='overflow-x:auto; white-space:pre; font-size:0.9em; "
                 "line-height:1.3'>" + _html.escape(byo_outs["unified_timeline"]) + "</pre>"
