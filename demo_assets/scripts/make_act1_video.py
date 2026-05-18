@@ -82,9 +82,12 @@ class Scene:
 # slide is intentionally the middle beat so a viewer dropping in within
 # the first ten seconds knows what project this is.
 SCENES: list[Scene] = [
-    Scene(CAPTION_PNG_1, visible_s=4.5, label="caption1 (personal hook)"),
-    Scene(TITLE_SLIDE_PNG, visible_s=4.0, label="title slide (Rytmi + Gemma 4)"),
-    Scene(CAPTION_PNG_2, visible_s=9.0, label="caption2 (bridge: dancer needs more)"),
+    # Trimmed for the sparkler re-cut (2026-05-18): the cover-intro now
+    # carries the branded open, so the personal hook + title can be
+    # tighter and the bridge no longer needs to over-hold.
+    Scene(CAPTION_PNG_1, visible_s=3.5, label="caption1 (personal hook)"),
+    Scene(TITLE_SLIDE_PNG, visible_s=2.8, label="title slide (Rytmi + Gemma 4)"),
+    Scene(CAPTION_PNG_2, visible_s=6.0, label="caption2 (bridge: dancer needs more)"),
 ]
 
 

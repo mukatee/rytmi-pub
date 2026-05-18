@@ -58,6 +58,9 @@ class Act:
 
 
 ACTS: list[Act] = [
+    # Sparkler re-cut (2026-05-18): open on the poster cover (fade-in
+    # from black) before any text slide, then dissolve into Act 1.
+    Act(OUTPUT_DIR / "cover_intro.mp4", "Cover · poster open"),
     Act(OUTPUT_DIR / "act1_hook.mp4", "Act 1 · hook"),
     Act(OUTPUT_DIR / "act2_architecture.mp4", "Act 2 · architecture"),
     # Act 2.5 restored 2026-05-17 as a single 5 s framing slide
@@ -68,6 +71,10 @@ ACTS: list[Act] = [
     # version restores the genre frame without the DSP-misfire beat.
     Act(OUTPUT_DIR / "act2_5_kizomba_intro.mp4", "Act 2.5 · kizomba framing"),
     Act(OUTPUT_DIR / "act3a_preroll.mp4", "Act 3a · pre-roll panels"),
+    # Sparkler pass #2 (2026-05-18): one-line structure→dance framing
+    # before the unified timeline — names the connection the timeline
+    # then demonstrates (per-section + per-transition coaching).
+    Act(OUTPUT_DIR / "structure_framing.mp4", "Act 3a · structure framing"),
     Act(OUTPUT_DIR / "act3a_unified_timeline.mp4", "Act 3a · unified timeline"),
     Act(OUTPUT_DIR / "rytmi_demo_reel.mp4", "Act 3 · audio reel (Option Z)"),
     Act(OUTPUT_DIR / "close.mp4", "Close"),

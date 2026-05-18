@@ -38,7 +38,14 @@ OUTPUT_PATH = OUTPUT_DIR / "close.mp4"
 
 SLIDE_1 = OUTPUT_DIR / "_close_what_ships.png"
 SLIDE_2 = OUTPUT_DIR / "_close_what_next.png"
-SLIDE_3 = OUTPUT_DIR / "_close_signature.png"
+# Sparkler re-cut #2 (2026-05-18): the close used to end on the bare
+# "DSP listens. Gemma talks." tagline — already said in Act 2, and the
+# wrong note to end on. We bookend instead: end on the *same poster the
+# video opens with* (couple + waveform + the verbatim Gemma line "keep a
+# small pulse in the body, and listen."). Open and close on the feeling,
+# grounded in real shipped output, with the substance (what ships /
+# what's next) kept in between.
+SLIDE_3 = ROOT / "demo_assets" / "cover_candidates" / "cover_video_help_me_hear.png"
 
 XFADE_S = 0.5
 WIDTH = 1920
@@ -100,17 +107,8 @@ def _render_slides() -> None:
         secondary_pt=36,
         secondary_align="left",
     )
-    render_caption_slide(
-        primary="DSP listens. Gemma talks.",
-        secondary=None,
-        footer="Rytmi  ·  github.com — Gemma 4 Good Hackathon",
-        output=SLIDE_3,
-        width=WIDTH,
-        height=HEIGHT,
-        primary_pt=120,
-        secondary_pt=46,
-        footer_pt=28,
-    )
+    # SLIDE_3 is the poster cover itself (bookend) — not rendered here;
+    # it's a static asset shared with the opening cover_intro.
 
 
 def _build_filter_graph(scenes: list[Scene], xfade_s: float) -> tuple[str, float]:

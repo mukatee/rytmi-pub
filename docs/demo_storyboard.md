@@ -1,5 +1,6 @@
 # Rytmi demo video storyboard
 
+> **Video title:** _Rytmi — Help Me Hear the Song_ (deliberately different from the writeup's _"Rytmi — Hear the Beat, Feel the Song"_: the video poses the personal question, the writeup answers it — same project, two front doors). No narration, so the title carries the emotional hook on its own.
 > **Target:** 3-minute pitch for the Gemma 4 Good Hackathon submission.
 > **Working format:** screen recording with **captions / on-screen text overlays — no voice-over**. Sound-off review is the full experience, not a degraded one; the artifacts being demonstrated (Gemma outputs, section tables, architecture diagram) are themselves text, so a voice track would compete with what the viewer needs to read. Pre-render notebook outputs; do not run notebooks live during recording (cold-start LLM calls + Demucs separation are too slow for tight pacing).
 > **Audience:** Kaggle judges plus general competition viewers. Some will dance, most won't. Some are technical, some aren't. Default to clear language, lean on the architecture insight rather than dance jargon.
@@ -52,7 +53,7 @@ Each clip exists in two variants: `timeline_<stem>.mp4` (no caption) and `timeli
 
 **Visual:**
 - (0:00–0:25) A kizomba track plays (~10s of audible audio under captions 1–3). After caption 1, a generic beat-tracker click overlay starts hitting wrong beats — the "loud syncopation mistaken for the 1" failure mode made *audible* and visible.
-- (0:25–0:30) Project name slide: _"Rytmi — DSP + Gemma 4 rhythm-learning prototype"_, subtitle _"helping dancers hear what the music is doing"_.
+- (0:25–0:30) Project name slide: _"Rytmi — Help Me Hear the Song"_, subtitle _"helping dancers hear what the music is doing"_. (On-screen subtitle wording is set by the build script — see the clarity-pass logs below for the current rendered string.)
 
 **Beat:** Lead with the *learner pain* — first-person stakes, not a feature pitch. Bachata is invisible in this Act; the demo's story is the kizomba learner's story.
 
@@ -446,3 +447,90 @@ After uploading the pass-#5 master to YouTube, a viewer flagged that the master 
 - **Net timing change**: +5.0 s (new Act 2.5) − 0.5 s (one new inter-act xfade) − 1.0 s (Act 1 caption1 trim) = **+3.5 s**. Master goes 175.5 → **179.0 s = 2:59.0**, 1.0 s headroom under the 3:00 cap.
 
 Trade-off accepted: 1 s of headroom is tight but the framing slide is worth more than the headroom because it removes a viewer cold-start question right before the Filomena deep-dive begins.
+
+### Cover image replaced (2026-05-18) — built — face of the submission
+
+Pass-#5 (μ.2) had `demo_assets/cover.png` as a copy of the architecture diagram. The diagram is an *explanation* — right for inside the writeup / Act 2, wrong as the cover, whose only job is one emotive glance at thumbnail size. Replaced with a purpose-built poster that leads with the project's real signature artifact instead of a block diagram.
+
+- **(π) `demo_assets/scripts/make_cover.py`** — new standalone builder. Loads the disk-cached `(audio, analysis)` for Charbel — _E Magia_, slices the real 159–173 s window around the T5 `main → break` boundary (165 s), and renders the waveform poster-grade: dark canvas, layered-glow cyan trace, real `SECTION_COLORS` bands at low alpha, a luminous pink seam at the transition. Composited with a backlit kizomba-couple silhouette and the verbatim two-tone caption (teal **Rytmi DSP** scaffold → violet **Gemma 4** coaching line, same provenance split as the reel captions). Honest by construction — every sample, the 165 s boundary, and the coaching text are actual pipeline output, only re-themed. Three candidates emitted to `demo_assets/cover_candidates/`: **A** landscape poster, **B** square (chosen), **C** minimal title-free 16:9.
+- **(ρ) `demo_assets/cover.png` now = cover_B** (1400×1400 square). Old architecture-diagram cover remains available at `demo_assets/output/architecture.png` for in-writeup / Act-2 use; nothing in the video pipeline referenced `cover.png`, so no act re-render. Writeup image alt-text and `docs/submission-checklist.md` cover line updated to match.
+- Title on the cover is the **writeup** title (_"Rytmi — Hear the Beat, Feel the Song"_), not the video title — the cover fronts the Kaggle submission. Candidate **C** is title-free if a video-specific thumbnail is wanted later. Silhouette source is image #4 of the generated `kizomba-silhouettes/` set; swap point is the `SILHOUETTE` constant in `make_cover.py`.
+- **(σ) Form-specific variants added later (2026-05-18).** Kaggle's submission form has its own slots: a 16:9 video cover (`cover_video_help_me_hear.png`, the **video** title _"Help Me Hear the Song"_) and a 560×280 card from which Kaggle crops a *square* thumbnail. The card went through iterations — single-layout → crop-safe dual (title-left / couple-right, nothing across the midline) → **chosen: `cover_card_story_short_airy_560x280.png`**, whose right square is a standalone story tile (couple + glowing pulse + short verbatim Gemma coaching line + a teal DSP line, "airy" light-scrim/semi-transparent text so the pulse reads through) and left square stays a clean title lockup. Pick the **right square** for the Kaggle thumbnail. All cuts emitted by `make_cover.py`; checklist documents the exact upload targets.
+
+### Sparkler re-cut (2026-05-18) — built — open on the cover, kill the repetition
+
+Viewer feedback after the gallery work: the master *felt* slow before the
+interesting part (songs playing + live timeline). Time-to-reel was ~1:57 of
+a 2:59 cut, and the Act 3a pre-roll said the same thing three ways
+(kizomba / bass-driven / low-percussion / intro-main-break-outro arc across
+`rhythm_anatomy`, `describe_sections`, `listening_guide`, `song_arc`). Five
+changes shipped (master **2:59.0 → 2:25.3**, −33.7 s):
+
+- **(τ) New `make_cover_intro.py` → `cover_intro.mp4`** (4.5 s incl. 0.5 s
+  xfade tail). Holds the 16:9 poster cover (`cover_video_help_me_hear.png`
+  — couple + halo + glowing E Magia waveform + verbatim Gemma line + the
+  video title) with a 0.7 s fade-in from black, silent stereo aac so it
+  stitches like any act. First entry in `compose_master_reel.py` `ACTS`.
+- **(υ) Act 1 trimmed** 18.5 → 13.3 s (caption1 4.5→3.5, title 4.0→2.8,
+  bridge 9.0→6.0): the cover now carries the branded open so the hook +
+  title no longer need to over-hold.
+- **(φ) Act 2 trimmed** 26.0 → 22.0 s (the three captions tightened;
+  architecture diagram kept at 8.0 s per prior viewer feedback).
+- **(χ) Act 3a pre-roll cut 4 → 2 panels**, 49.5 → 21.0 s. Kept
+  `rhythm_anatomy` (Gemma: what kind of music) + `listening_guide` (Gemma:
+  where the pulse is hard). Dropped `describe_sections` (DSP table — the
+  structure is shown far more vividly by the unified-timeline + audio reel
+  right after) and `song_arc` (restated the other two). This removed the
+  repetition the viewer actually flagged.
+- **(ψ) Re-stitched** via `compose_master_reel.py` (now 8 acts, 7 xfades).
+  Live reel lands at ~1:24 (was ~1:57) — viewer reaches songs+timeline
+  ~33 s sooner; final 2:25.3 leaves comfortable headroom under 3:00.
+
+Only scripts + docs are version-controlled; the master/act MP4s are
+regenerated build artifacts. Submission was already filed before this
+re-cut (editable until deadline), so this is a safe quality pass — revert
+is `git revert` of this commit + a re-stitch.
+
+### Sparkler re-cut pass #2 (2026-05-18) — built — Act 2 dedup + feeling bookend
+
+Second viewer pass flagged three things the first sparkler cut didn't
+address: (a) Act 2 captions 1 & 2 both said "DSP listens, Gemma talks";
+(b) caption 3 ("tried Gemma-as-listener") is a writeup/docs point that
+plays out-of-context in a *demo*; (c) the whole cut reads as technical —
+the *feeling* the cover promises (dance as connection) never returns
+after the motivation slide. Master 2:25.3 → **2:24.3**.
+
+- **(ω) Act 2 deduped + DSP table restored as the bridge.** caption2
+  (redundant restatement) and caption3 (out-of-place negative result)
+  dropped. In caption2's slot Act 2 now shows the **real
+  `describe_sections` DSP table** (heading *"This is what Gemma 4 is
+  given"*), imported verbatim from `make_act3a_preroll_video.
+  DESCRIBE_SECTIONS_BODY` so it can't drift. Reads as: claim (caption1)
+  → shape (architecture diagram) → the concrete thing the arrow points
+  at (DSP table) → Act 3a where Gemma answers exactly that table. Act 2
+  22.0 → 21.0 s.
+- **(α2) Close bookends on feeling, not the tech tagline.**
+  `make_close_video.py` SLIDE_3 was the bare *"DSP listens. Gemma
+  talks."* slide (already said in Act 2 caption1 — a duplicate, and the
+  wrong note to end on). SLIDE_3 now points at the **opening poster**
+  (`cover_video_help_me_hear.png`) — same couple + waveform + verbatim
+  Gemma line *"keep a small pulse in the body, and listen."* the video
+  opened on. Open and close on the feeling; the honest substance ("what
+  ships" / "what's next") stays in between. Grounded: the bookend line
+  is real shipped output, not a new claim. No render needed for SLIDE_3
+  (static shared asset); only `close.mp4` re-stitched.
+- The "feeling was missing" fix is deliberately framing-only: nothing
+  invented. The emotional register comes from (1) the poster bookend and
+  (2) the verbatim coaching prose already in the unified-timeline + reel
+  acts — surfaced, not manufactured.
+
+- **(β2) Structure→dance framing slide** *(built — was deferred, then
+  added same day)*. New `make_structure_framing_video.py` →
+  `structure_framing.mp4` (5.0 s incl. 0.5 s tail): a single caption —
+  *"A song isn't one thing."* / *"Each part — and the moment between —
+  asks you to move differently."* — inserted in `compose_master_reel.py`
+  `ACTS` between the pre-roll and the unified timeline. Names the
+  structure↔dance connection the unified timeline then *demonstrates*
+  (per-section P# + per-transition T# coaching). Grounded: it's a plain
+  statement of what the pipeline does (different coaching per section /
+  boundary), not a romantic claim. Master 2:24.3 → **2:28.8**.

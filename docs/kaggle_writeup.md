@@ -1,9 +1,11 @@
-# Rytmi — DSP + Gemma 4 rhythm-learning prototype
+# Rytmi — Hear the Beat, Feel the Song
+
+*A local-first dance coach where DSP listens honestly and Gemma 4 turns it into something you can move to.*
 
 > **Submitted track:** _Future of Education_ (rhythm/music learning).
 > Also eligible for _Ollama Special Technology_ (local-first deployment).
 
-![Rytmi architecture — DSP listens, Gemma 4 talks](../demo_assets/cover.png)
+![Rytmi — Hear the Beat, Feel the Song: a backlit kizomba couple over the real E Magia transition waveform, captioned with Gemma 4's coaching for that exact moment](https://raw.githubusercontent.com/mukatee/rytmi-pub/master/demo_assets/cover.png)
 
 ## The problem
 
@@ -72,12 +74,16 @@ Next steps (also on the demo close-slide): sharper beat & downbeat grid (meter v
 
 ## Links to assets
 
-- **GitHub repo:** <https://github.com/mukatee/rytmi-pub>
-- **Kaggle Notebook (live demo):** <https://www.kaggle.com/code/donkeys/gemma-dancing>
-- **Demo video (3 min, YouTube):** <https://youtu.be/ISkf6fZbG-Y>
-- **Demo notebook:** [`notebooks/00_demo.ipynb`](https://github.com/mukatee/rytmi-pub/blob/master/notebooks/00_demo.ipynb)
-- **Gemma model card:** <https://ai.google.dev/gemma> · Kaggle Models: <https://www.kaggle.com/models/google/gemma> · Ollama tags: <https://ollama.com/library/gemma3>
-- **Architecture, evaluation, phase notes:** [how-it-works.md](how-it-works.md), [project-vision.md](project-vision.md), [experiments/](experiments/)
+| Title | URL | What it is |
+|---|---|---|
+| GitHub repository | https://github.com/mukatee/rytmi-pub | Full source — DSP pipeline, Gemma prompts, tests, notebooks. |
+| Live demo notebook (Kaggle) | https://www.kaggle.com/code/donkeys/gemma-dancing | One-click end-to-end run of the Rytmi pipeline. |
+| 3-minute demo video | https://youtu.be/S3yNA6M_CFs | Problem → DSP+Gemma architecture → kizomba walkthrough. |
+| Demo notebook (source) | https://github.com/mukatee/rytmi-pub/blob/master/notebooks/00_demo.ipynb | The notebook the video records; readable without running. |
+| Architecture & evaluation | https://github.com/mukatee/rytmi-pub/blob/master/docs/how-it-works.md | DSP/Gemma split, the verifier, eval-set results. |
+| Project vision & design log | https://github.com/mukatee/rytmi-pub/blob/master/docs/project-vision.md | Why style-aware analysis; running decision log. |
+| Phase experiment notes | https://github.com/mukatee/rytmi-pub/tree/master/docs/experiments | Dated notes — what was tried, evidence, what shipped. |
+| Gemma model card | https://ai.google.dev/gemma | Google's Gemma docs (also on [Kaggle Models](https://www.kaggle.com/models/google/gemma) · [Ollama](https://ollama.com/library/gemma3)). |
 
 ## A note on the demo video's audio
 

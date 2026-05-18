@@ -69,7 +69,7 @@ coaching, transitions, listening guides, drills).
 |---|---|
 | Code (public mirror) | https://github.com/mukatee/rytmi-pub |
 | Kaggle Notebook      | https://www.kaggle.com/code/donkeys/gemma-dancing |
-| Demo video           | https://youtu.be/ISkf6fZbG-Y |
+| Demo video           | https://youtu.be/S3yNA6M_CFs |
 | Writeup              | see `docs/kaggle_writeup.md` in the repo |
 
 **Audio licence:** the demo track used below is released under
@@ -458,7 +458,7 @@ print("setup done.")"""))
 CELLS.append(md("""\
 ## Why this track?
 
-The [demo video](https://youtu.be/ISkf6fZbG-Y) uses copyrighted
+The [demo video](https://youtu.be/S3yNA6M_CFs) uses copyrighted
 kizomba/bachata for authenticity (Filomena Maricoa, Charbel).  For this
 notebook we needed audio that is **fully free to redistribute** so
 judges can rerun without rights issues.  After surveying:
@@ -683,7 +683,7 @@ is in the public repository
 ### Demo video
 
 End-to-end walkthrough on real-world (copyrighted) kizomba and bachata
-tracks: <https://youtu.be/ISkf6fZbG-Y>.  Educational use only; rights
+tracks: <https://youtu.be/S3yNA6M_CFs>.  Educational use only; rights
 remain with the original artists.
 
 ### Further reading

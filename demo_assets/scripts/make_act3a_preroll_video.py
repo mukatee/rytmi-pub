@@ -140,11 +140,18 @@ class Scene:
 # Visible-second budget — 4 scenes with 3 xfades of 0.5 s each:
 #   total = 11.0 + (0.5 + 12.0) + (0.5 + 13.0) + (0.5 + 12.0) = 49.5 s
 # The master stitcher can extend this with a brief hold if needed.
+# Sparkler re-cut (2026-05-18): 4 → 2 panels. The old four said the same
+# thing three ways (kizomba / bass-driven / low-percussion / intro-main-
+# break-outro arc) and pushed the live reel out to ~2:00. We keep the two
+# that earn their seconds and don't repeat each other:
+#   • rhythm_anatomy  — Gemma 4 says *what kind of music this is*
+#   • listening_guide — Gemma 4 *coaches where the pulse is hard*
+# describe_sections (DSP table) is dropped: the structure is shown far
+# more vividly by the unified-timeline + audio reel that follow. song_arc
+# is dropped: it restates rhythm_anatomy + listening_guide.
 SCENES: list[Scene] = [
-    Scene(PANEL_PNG_1, visible_s=11.0, label="rhythm_anatomy"),
-    Scene(PANEL_PNG_2, visible_s=12.0, label="describe_sections (truncated)"),
-    Scene(PANEL_PNG_3, visible_s=13.0, label="listening_guide"),
-    Scene(PANEL_PNG_4, visible_s=12.0, label="song_arc"),
+    Scene(PANEL_PNG_1, visible_s=9.5, label="rhythm_anatomy"),
+    Scene(PANEL_PNG_3, visible_s=11.0, label="listening_guide"),
 ]
 
 

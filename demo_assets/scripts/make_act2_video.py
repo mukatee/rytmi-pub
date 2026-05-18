@@ -42,6 +42,11 @@ sys.path.insert(0, str(ROOT / "demo_assets" / "scripts"))
 
 from make_caption_slide import render_caption_slide  # noqa: E402
 from make_architecture_diagram import render as render_architecture  # noqa: E402
+from make_notebook_panel import render_notebook_panel  # noqa: E402
+# Reuse the verbatim DSP-table body so it can't drift from the pre-roll's
+# source of truth — this is the real `describe_sections` output Gemma is
+# fed, shown here as the concrete "based on what" bridge after the diagram.
+from make_act3a_preroll_video import DESCRIBE_SECTIONS_BODY  # noqa: E402
 
 OUTPUT_DIR = ROOT / "demo_assets" / "output"
 
@@ -49,8 +54,7 @@ ARCHITECTURE_PNG = OUTPUT_DIR / "architecture.png"
 OUTPUT_PATH = OUTPUT_DIR / "act2_architecture.mp4"
 
 CAPTION_PNG_1 = OUTPUT_DIR / "_act2_caption1.png"
-CAPTION_PNG_2 = OUTPUT_DIR / "_act2_caption2.png"
-CAPTION_PNG_3 = OUTPUT_DIR / "_act2_caption3.png"
+DSP_TABLE_PNG = OUTPUT_DIR / "_act2_dsp_table.png"
 
 XFADE_S = 0.5
 WIDTH = 1920
@@ -69,16 +73,22 @@ class Scene:
 #   total = 5.5 + (0.5 + 8) + (0.5 + 6.5) + (0.5 + 4.5) = 26.0 s
 # Architecture diagram (scene 2) keeps its full 8.0 s of read time —
 # every other beat is shorter caption text that reads cleanly faster.
+# Sparkler re-cut #2 (2026-05-18): the old caption2 ("DSP finds … Gemma
+# turns that into language") just restated caption1's "DSP listens.
+# Gemma talks." — dropped. caption3 ("tried Gemma-as-listener") is a
+# writeup/docs point, not a demo beat — dropped. In caption2's slot we
+# now show the *real* `describe_sections` DSP table: the concrete "based
+# on what" that the diagram's arrow points at, and the natural transition
+# into Act 3a where Gemma answers exactly this table.
 SCENES: list[Scene] = [
-    Scene(CAPTION_PNG_1, visible_s=5.5, label="caption1 (split in two)"),
+    Scene(CAPTION_PNG_1, visible_s=4.0, label="caption1 (split in two)"),
     Scene(ARCHITECTURE_PNG, visible_s=8.0, label="architecture diagram"),
-    Scene(CAPTION_PNG_2, visible_s=6.5, label="caption2 (what each side does)"),
-    Scene(CAPTION_PNG_3, visible_s=4.5, label="caption3 (negative result → architecture)"),
+    Scene(DSP_TABLE_PNG, visible_s=8.0, label="DSP table (the input Gemma gets)"),
 ]
 
 
 def _render_caption_pngs() -> None:
-    """Render Act 2's three caption slides. Idempotent."""
+    """Render Act 2's opening caption + the DSP-table panel. Idempotent."""
     render_caption_slide(
         primary="Rytmi splits the problem in two.",
         secondary="DSP listens. Gemma talks.",
@@ -89,25 +99,18 @@ def _render_caption_pngs() -> None:
         primary_pt=98,
         secondary_pt=72,
     )
-    render_caption_slide(
-        primary="DSP finds beats, sections, beat-clarity, downbeat confidence.",
-        secondary="Gemma 4 turns that into language a learner can use.",
-        footer=None,
-        output=CAPTION_PNG_2,
-        width=WIDTH,
-        height=HEIGHT,
-        primary_pt=64,
-        secondary_pt=56,
-    )
-    render_caption_slide(
-        primary="Tried Gemma-as-listener first.",
-        secondary="It missed obvious percussion. DSP earns its keep.",
-        footer=None,
-        output=CAPTION_PNG_3,
-        width=WIDTH,
-        height=HEIGHT,
-        primary_pt=80,
-        secondary_pt=58,
+    # The real `describe_sections` output — the structured table the
+    # diagram's arrow points at. Heading + footer make the data-flow
+    # direction explicit so it reads as "this is what Gemma is given",
+    # the concrete bridge into Act 3a's Gemma panels.
+    render_notebook_panel(
+        heading="This is what Gemma 4 is given",
+        tag="[describe_sections]  Filomena – Teu Toque",
+        cell_prompt="In [7]:  describe_sections(audio, sections, beats)",
+        body=DESCRIBE_SECTIONS_BODY,
+        output=DSP_TABLE_PNG,
+        body_pt=22,
+        footer="notebooks/00_demo.ipynb · verbatim Rytmi DSP output — Gemma reads this",
     )
 
 
