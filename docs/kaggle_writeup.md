@@ -64,7 +64,9 @@ One live run showed why the verifier matters: Gemma generated good drill prose b
 - **The model is more robust to new vocabulary than expected — *if* surrounding structure is consistent.** When DSP started carving `instrumental` sub-sections out of vocal-quiet runs, no prompt's allow-list mentioned `instrumental`. Gemma 4 wove it in naturally (_"builds through an instrumental phase toward a high-energy peak"_) with zero prompt updates.
 - **Code beats prompt prose for structural invariants.** Five prompt iterations couldn't keep the drills plan from crossing `main → outro` under non-determinism. A deterministic post-generation verifier (parses P# format, validates against `analysis.phases`, repairs cross-boundary ranges, fills missing phases) made the whole class of bug go away. Prompt prose alone would never have closed that 14/17 gap.
 
-Two negative results worth recording: Gemma audio support is speech-oriented and unreliable for music-analytic prompts on raw-song input (this is why DSP grounds everything); the smaller multimodal E4B truncated mid-output on the heaviest prompts for tracks longer than ~3.5 minutes, so 26B is the documented baseline for the demo.
+**Gemma 4 audio for music understanding — tested, shelved.** We explored three angles. Free-form musicality prompts on 12-second clips produced kizomba-shaped prose that didn't differentiate a break from a steady main section — in one controlled test, the excerpt with the most obvious rhythmic break was described as having a "smooth inviting flow", which is the opposite of what was happening. Using Gemma as a vocal-activity source drifted ~8 counts versus Demucs on the eval set, so Demucs stayed the default and the Gemma path became opt-in only. Language detection on transcribed vocals worked 6/7 — useful as a side signal, not load-bearing. The one Gemma audio task that paid off was the simplest: a YES/NO "speech or singing?" on 5-second windows, which gave us the `spoken_intro` section label and fixed real coaching failures on dialog-intro tracks. **Pattern: when the audio task is structurally close to what a speech model was trained on, it works; when you ask for music structure, it produces plausible-sounding text regardless of what the audio actually contains — which is exactly why DSP grounds everything.**
+
+The smaller multimodal E4B also truncated mid-output on the heaviest prompts for tracks longer than ~3.5 minutes, so 26B is the documented baseline for the demo.
 
 ## What this demonstrates and where it goes next
 
@@ -77,6 +79,7 @@ Next steps (also on the demo close-slide): sharper beat & downbeat grid (meter v
 ## Links to assets
 
 - **GitHub repo:** <https://github.com/mukatee/rytmi-pub>
+- **Kaggle Notebook (live demo):** <https://www.kaggle.com/code/donkeys/gemma-dancing>
 - **Demo video (3 min, YouTube):** <https://youtu.be/ISkf6fZbG-Y>
 - **Demo notebook:** [`notebooks/00_demo.ipynb`](https://github.com/mukatee/rytmi-pub/blob/master/notebooks/00_demo.ipynb)
 - **Gemma model card:** <https://ai.google.dev/gemma> · Kaggle Models: <https://www.kaggle.com/models/google/gemma> · Ollama tags: <https://ollama.com/library/gemma3>

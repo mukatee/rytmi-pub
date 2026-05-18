@@ -37,8 +37,16 @@ def md(src: str):
     return nbf.v4.new_markdown_cell(src)
 
 
-def code(src: str):
-    return nbf.v4.new_code_cell(src)
+def code(src: str, hide_input: bool = True):
+    # Default hide_input=True so the Kaggle viewer shows only the cell
+    # output (the visuals + Gemma text) and tucks the boilerplate code
+    # behind a 'Show input' toggle.  Pass hide_input=False for the few
+    # cells where seeing the call site adds value (the per-track
+    # `display_track(...)` line is the obvious one).
+    cell = nbf.v4.new_code_cell(src)
+    if hide_input:
+        cell.metadata["_kg_hide-input"] = True
+    return cell
 
 
 CELLS = []
@@ -500,8 +508,14 @@ def display_track(slug: str, display_title: str) -> None:
     show_timeline(analysis, title=display_title)
 
     # --- Per-section table -------------------------------------------------
+    # Wrap the plain-text table in a horizontally-scrollable <pre> so the
+    # Kaggle notebook viewer (narrow column) doesn't word-wrap it.
     display(Markdown("### Section table (what DSP heard)"))
-    print(describe_sections(analysis))
+    import html as _html
+    display(HTML(
+        "<pre style='overflow-x:auto; white-space:pre; font-size:0.9em; "
+        "line-height:1.3'>" + _html.escape(describe_sections(analysis)) + "</pre>"
+    ))
 
     # --- Gemma outputs -----------------------------------------------------
     headings = {
@@ -522,7 +536,10 @@ def display_track(slug: str, display_title: str) -> None:
 
     if "unified_timeline" in outs:
         display(Markdown("### Unified timeline (phases + transitions in one story)"))
-        display(Markdown("```\\n" + outs["unified_timeline"] + "\\n```"))
+        display(HTML(
+            "<pre style='overflow-x:auto; white-space:pre; font-size:0.9em; "
+            "line-height:1.3'>" + _html.escape(outs["unified_timeline"]) + "</pre>"
+        ))
 
 print("display_track() ready.")"""))
 
@@ -535,7 +552,9 @@ TRACKS = [
 
 for slug, title in TRACKS:
     CELLS.append(md(f"## *{title}* — full pipeline"))
-    CELLS.append(code(f"display_track({slug!r}, {title!r})"))
+    # hide_input=False: the `display_track(slug, title)` one-liner is
+    # the only user-facing code call worth showing in the Kaggle viewer.
+    CELLS.append(code(f"display_track({slug!r}, {title!r})", hide_input=False))
 
 # ----------------------------------------------------------------------
 # BYO audio
@@ -576,8 +595,12 @@ if AUDIO_PATH and Path(AUDIO_PATH).exists():
                 display(Markdown(f"### {heading}"))
                 display(Markdown(as_markdown(text)))
         if "unified_timeline" in byo_outs:
+            import html as _html
             display(Markdown("### Unified timeline"))
-            display(Markdown("```\\n" + byo_outs["unified_timeline"] + "\\n```"))
+            display(HTML(
+                "<pre style='overflow-x:auto; white-space:pre; font-size:0.9em; "
+                "line-height:1.3'>" + _html.escape(byo_outs["unified_timeline"]) + "</pre>"
+            ))
 else:
     print("No AUDIO_PATH set — skipping BYO cell.")
     print("To use your own audio: see the swap-in cell above.")"""))

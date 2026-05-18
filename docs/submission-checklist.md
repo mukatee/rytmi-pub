@@ -17,10 +17,12 @@ In `docs/kaggle_writeup.md`:
 
 - [x] GitHub repo URL: https://github.com/mukatee/rytmi-pub ✓
 - [x] YouTube URL in writeup: https://youtu.be/ISkf6fZbG-Y ✓
+- [x] Kaggle Notebook URL: https://www.kaggle.com/code/donkeys/gemma-dancing ✓
 
 In `README.md`:
 
 - [x] YouTube URL: https://youtu.be/ISkf6fZbG-Y ✓
+- [x] Kaggle Notebook URL: https://www.kaggle.com/code/donkeys/gemma-dancing ✓
 
 ## Music attribution / risk
 
@@ -36,7 +38,7 @@ Fresh clone reviewer path (validates `requirements-demo.txt`):
 git clone <repo> && cd kaggle-gemma4-rytmi
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements-demo.txt && pip install -e .
-ollama pull gemma3:4b && ollama serve
+ollama pull gemma4:e4b && ollama serve
 jupyter lab notebooks/00_demo.ipynb
 # run first cell on data/songs/eval_set/ track; verify Gemma output appears.
 ```
